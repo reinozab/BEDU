@@ -102,5 +102,5 @@ v.id_empleado;`
 
 # Reto Final
 
-[**Reto Final](https://github.com/reinozab/BEDU/blob/2c6a4d9d0dbe073b55135ebfb570239d79ab84f5/Modulo%201%20Introduccion%20a%20BD/Script/Seccion2retofinal.sql)
+**[Reto Final](https://github.com/reinozab/BEDU/blob/2c6a4d9d0dbe073b55135ebfb570239d79ab84f5/Modulo%201%20Introduccion%20a%20BD/Script/Seccion2retofinal.sql)
 
