@@ -21,6 +21,8 @@ WHERE id_puesto= 4 ;`
 | Maxy|
 
 - ¿Qué puestos tienen un salario mayor a $10,000?
+
+
 `SELECT nombre
 FROM puesto
 WHERE salario>10000
@@ -30,12 +32,20 @@ ORDER BY nombre;`
 ![](https://github.com/reinozab/BEDU/blob/091200916bcd7b8b392d9b04dc8957ebf2e0fbdd/Modulo%201%20Introduccion%20a%20BD/Img/sec01rt02.png)
 
 - ¿Qué articulos tienen un precio mayor a $1,000 y un iva mayor a 100?
+
+
 `   select nombre 
     FROM articulo
     WHERE precio>1000 and iva>100
     ORDER BY nombre;`
+    
+    
 ![](https://github.com/reinozab/BEDU/blob/94871c09049626179103b938ccf66ca069f6671c/Modulo%201%20Introduccion%20a%20BD/Img/sec01rt02_2.png)
+
+
 - ¿Qué ventas incluyen los artículos 135 o 963 y fueron hechas por los empleados 835 o 369?
+
+
 `select *
 FROM venta as v
 INNER JOIN articulo a
