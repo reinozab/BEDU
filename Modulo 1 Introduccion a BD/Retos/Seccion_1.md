@@ -68,3 +68,10 @@ limit 5;`
 ![](https://github.com/reinozab/BEDU/blob/80f2439fb93504d0a2ba6b3660defc96a8e23ed2/Modulo%201%20Introduccion%20a%20BD/Img/sec01rt03.png)
 
 
+## Ejercicios Sesión 1
+
+Todas las consultas que realices deberás mantenerlas dentro del editor de textos de MySQL Workbench. Al finalizar, guarda este archivo, llendo al menú `File` > `Save script`. Recuerda que para hacer consultas a una tabla debes conocer primero su estructura.
+
+**Deberás entregar el archivo `.sql` correspondiente**
+
+[Reto final](https://github.com/reinozab/BEDU/blob/a3e5fd464758e9ccba6d19e117c7fe51c001f93b/Modulo%201%20Introduccion%20a%20BD/Script/Seccion1retofinal.sql)
