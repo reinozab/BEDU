@@ -65,4 +65,6 @@ Usando la base de datos tienda, escribe una consulta que permita obtener el top 
 order by salario desc
 limit 5;`
 
+![](https://github.com/reinozab/BEDU/blob/80f2439fb93504d0a2ba6b3660defc96a8e23ed2/Modulo%201%20Introduccion%20a%20BD/Img/sec01rt03.png)
+
 
