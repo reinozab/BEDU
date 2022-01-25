@@ -1,15 +1,16 @@
 # Seccion 01
 
-## Reto 01
+## Reto 01: Estructura de una tabla
 Usando la base de datos tienda, muestra la descripción de las tablas articulo, puesto y venta. Por cada tipo de dato que encuentres llena la siguiente tabla (a mano, puedes dibujarla en un cuaderno o donde tu prefieras). Usa la Documentación de MySQL como referencia si no recuerdas como se usa un comando por supuesto puedes preguntarle al experto.
 Realizando ingeria inversa podemos visualizar los tipo de datos que contiene cada tabla.
 
 ![](https://github.com/reinozab/BEDU/blob/db92e971da3a62fd0919b35f6dac49eb5dcbc020/Modulo%201%20Introduccion%20a%20BD/Img/sec01rt01.png)
 
-## Reto 2
+## Reto 2: Estructura básica de una consulta
 Usando la tabla empleados, escribe consultas que permitan responder las siguientes preguntas.
 
 -  ¿Cuál es el nombre de los empleados con el puesto 4?
+
 `USE tienda;
 SELECT nombre
 FROM empleado
@@ -55,3 +56,15 @@ ON e.id_empleado = v.id_empleado
 WHERE a.id_articulo IN (135,963) and e.id_empleado IN (835,396)`
 
 ![](https://github.com/reinozab/BEDU/blob/a493aae7a578a87305d0a5124b83f2210fa2f2eb/Modulo%201%20Introduccion%20a%20BD/Img/sec01rt02_3.png)
+
+## Reto 3: Ordenamientos y Límites
+
+Usando la base de datos tienda, escribe una consulta que permita obtener el top 5 de puestos por salarios.
+
+`select * FROM puesto 
+order by salario desc
+limit 5;`
+
+![](https://github.com/reinozab/BEDU/blob/80f2439fb93504d0a2ba6b3660defc96a8e23ed2/Modulo%201%20Introduccion%20a%20BD/Img/sec01rt03.png)
+
+
