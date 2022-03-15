@@ -1,0 +1,74 @@
+---
+title: "Economia Naranja Modulo 2"
+author: "Bernabe Reinoza"
+date: "15/3/2022"
+output: slidy_presentation
+---
+## Economía Naranja
+La economía naranja hace referencia al mundo de la cultura, la industria creativa y la creación de contenido. Se denomina, por tanto, universo naranja a todas aquellas actividades que transformen el conocimiento en un bien o un servicio que trate de fomentar, además del beneficio económico, el desarrollo de la cultura y la creatividad.
+
+**¿Qué actividades integra la economía naranja?**
+Como íbamos diciendo, la economía naranja hace referencia a todas aquellas actividades que se encuentren directamente relacionadas con el mundo de la cultura, el arte o la creatividad. En este sentido, una serie de actividades que consistan en la transformación de ideas en bienes y servicios relacionados con el mundo de la cultura.
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Data Set y Objtivo del Proyecto
+
+**¿Qué es la economía naranja?**
+Es donde se mezclan las industrias culturales con las áreas de soporte como el desarrollo de aplicaciones o software.
+
+**Oportunidades en LATAM.**
+**Buscaremos responder a la pregunta: **
+Si tienes un startup que hace software, ¿en qué país abrirías una oficina?
+
+El dataset de economía naranja fue creado con las siguientes variables:
+
+- Pais LATAM
+- PIB Per Cápita
+- PIB Pais
+- Crecimiento PIB
+- Aporte de servicios a PIB.
+- Aporte de economía naranja a PIB.
+- Penetración de internet.
+- Inflación.
+- Tasa de desempleo.
+- Población debajo de la línea de pobreza.
+- Edad mediana de la población.
+- Porcentaje de la población entre 25-54 años.
+- Inversión en educación %PIB.
+
+*El data set fue crado por la proferora Sonia Ardila Senior Data Specialist en Claro Colombia* 
+
+## Mis datos
+
+```{r df, echo = TRUE}
+df<- read.csv("orangeec.csv", header = TRUE)
+df
+str(df)
+summary(df)
+
+```
+
+
+
+## Slide with Bullets
+
+- Bullet 1
+- Bullet 2
+- Bullet 3
+
+## Slide with R Output
+
+```{r cars, echo = TRUE}
+summary(cars)
+```
+
+## Slide with Plot
+
+```{r pressure}
+plot(pressure)
+```
+
