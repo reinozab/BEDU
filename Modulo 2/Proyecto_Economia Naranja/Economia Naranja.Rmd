@@ -2,20 +2,20 @@
 title: "Economia Naranja Modulo 2"
 author: "Bernabe Reinoza"
 date: "15/3/2022"
-output: slidy_presentation
+output: html_document
 ---
-## Economía Naranja
+## Economía Naranja {.smaller}
 La economía naranja hace referencia al mundo de la cultura, la industria creativa y la creación de contenido. Se denomina, por tanto, universo naranja a todas aquellas actividades que transformen el conocimiento en un bien o un servicio que trate de fomentar, además del beneficio económico, el desarrollo de la cultura y la creatividad.
 
-**¿Qué actividades integra la economía naranja?**
+**¿Qué actividades integra la economía naranja?** 
 Como íbamos diciendo, la economía naranja hace referencia a todas aquellas actividades que se encuentren directamente relacionadas con el mundo de la cultura, el arte o la creatividad. En este sentido, una serie de actividades que consistan en la transformación de ideas en bienes y servicios relacionados con el mundo de la cultura.
 
 
-```{r setup, include=FALSE}
+```{r setup, include=FALSE} 
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Data Set y Objtivo del Proyecto
+## Data Set y Objtivo del Proyecto {.smaller}
 
 **¿Qué es la economía naranja?**
 Es donde se mezclan las industrias culturales con las áreas de soporte como el desarrollo de aplicaciones o software.
@@ -44,17 +44,43 @@ El dataset de economía naranja fue creado con las siguientes variables:
 
 ## Mis datos
 
-```{r df, echo = TRUE}
+
+## Data set
+
+```{r , echo = TRUE}
+
 df<- read.csv("orangeec.csv", header = TRUE)
-df
+knitr::kable(df[,], caption = 'Economía Naranja')
+
+```
+## Sumary
+```{r , echo = TRUE}
 str(df)
 summary(df)
 
 ```
+### Algunos datos adiciones
+
+Que paises tienen **PIB mayor o igual a 15.000 USD**
+```{r , echo = TRUE}
+na.omit(df[df$GDP.PC>=15000,])
+
+```
+
+Que que países **la economía naranja (industrias creativas) aporta el 2% a su PIB**
+```{r , echo = TRUE}
+na.omit(df[df$Creat.Ind...GDP<=2,])
+
+```
+
+Penetracion de internet en la poblacion sea **mayor al 80%** y que la inversion en educacion del PIB sean **mayor o igual a 4.5**
+
+```{r , echo = TRUE}
+na.omit(new_Orange <- subset(df,Internet.penetration...population>80 & Education.invest...GDP>=4.5,select=c(Country,Creat.Ind...GDP,Internet.penetration...population)))
+```
 
 
-
-## Slide with Bullets
+## Análisis Exploratorio de Datos
 
 - Bullet 1
 - Bullet 2
