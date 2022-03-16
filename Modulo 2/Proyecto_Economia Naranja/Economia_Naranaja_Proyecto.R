@@ -187,3 +187,11 @@ TopNaranjas <- df %>% filter(Country %in% c("Mexico", "Panama", "Argentina", "Co
 TopNaranjas
 
 TopNaranjas %>% arrange(desc(Creat.Ind...GDP))
+
+
+install.packages("RColorBrewer")
+library("RColorBrewer")
+
+
+
+ggplot(TopNaranjas, aes(x=Internet.penetration...population, y=GDP.PC,fill=Creat.Ind...GDP)) + geom_tile()+ facet_wrap(~Country)+scale_fill_gradient(colors(distinct = TRUE))
