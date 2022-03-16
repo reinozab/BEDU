@@ -80,21 +80,146 @@ na.omit(new_Orange <- subset(df,Internet.penetration...population>80 & Education
 ```
 
 
-## Análisis Exploratorio de Datos
 
-- Bullet 1
-- Bullet 2
-- Bullet 3
+# Análisis Exploratorio de Datos
 
-## Slide with R Output
+## Relación entre los datos.
 
-```{r cars, echo = TRUE}
-summary(cars)
+Podemos observar graficamente que la relación es dispersa y lo podemos verificar con la correlación que analizaremos mas adelante-
+
+Aca vemos unos datos bastante dispersos tambien, sin embargo vemos dos datos interesantes donde dos paises tienen un PIB per capita bastante alto y un % de aporte de la economia naranjan alto.
+```{r out.width='50%',fig.show="hold",fig.pos="htbp"}
+
+
+plot(df$Unemployment ~ df$Education.invest...GDP,
+     xlab="Inversion educación (%PIB)",
+     ylab ="Desempleo",
+     main= "Relación inversion en Educación y desempleo")
+
+
+plot(df$GDP.PC ~ df$Creat.Ind...GDP,
+     xlab="Aporte de economía naranja al PIB (%)",
+     ylab ="PIB per cápita",
+     main= "Relación entre econimía narnaja y PIB per cápita ")
+
+
 ```
 
-## Slide with Plot
 
-```{r pressure}
-plot(pressure)
+```{r , echo = TRUE}
+new<-subset(df,select=c(2,4,8,13))
+pairs(new)
+cor(new)
 ```
+
+# Correlaciones de Interes
+
+Tomamos los datos que pensamos que pueden influencia en el aporte de economia naranja.
+```{r , echo = TRUE}
+newdata<-subset(df,select=c(5,6,10,11,12,13))
+pairs(newdata)
+cor(newdata,use = "complete.obs")
+```
+
+**Se descartaron la relación de las variables de Penetración de Internet y la inversión en educación, con el aporte de la economía naranja al PIB.**
+
+## Gráficas de Caja
+```{r ,echo=FALSE}
+library("ggplot2")
+(mediaPIB<-mean(df$GDP.PC))
+library("dplyr")
+df <-df %>%
+  mutate(Strong_economy = ifelse(GDP.PC < mediaPIB,
+                                 "Por debajo promedio pib per capita",
+                                 "Sobre-Arriba promedio pib per capita"))
+```
+
+```{r out.width='45%',fig.show="hold",fig.pos="htbp"}
+par(mar = c(4, 4, 0.1, 0.1))
+
+ggplot(df,aes(x=Strong_economy, y=Creat.Ind...GDP, fill=Strong_economy))+
+  geom_boxplot(alpha=0.4)+
+  labs(x="Tipo de País",y="Aporte de Economía Naranja la PIB",
+       title="Aporte Ecomonía Naranja en PIB paises LATAM con alto y bajo PIB per cápita")+
+  theme(legend.position = "none")+
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+
+
+
+ggplot(df,aes(x=Strong_economy, y=Internet.penetration...population, fill=Strong_economy))+
+  geom_boxplot(alpha=0.3)+
+  #scale_y_continuous(breaks = seq(40, max(100), 10))+
+  labs(x="Tipo de País",y="Penetración de Internet(%)",
+       title="Penetración de Internet en PIB paises LATAM con alto y bajo PIB per cápita")+
+  theme(legend.position = "none")+
+  theme(panel.background = element_blank(),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank())
+```
+
+
+```{r,echo=FALSE}
+library("plotly")
+
+```
+
+```{r,echo=FALSE}
+my_graph<-ggplot(df, aes(Internet.penetration...population,Creat.Ind...GDP,label=row.names(df))) +
+  geom_point(aes(color=factor(Strong_economy), size=GDP.Growth..))+
+  labs(x="Penetracion Internet",y="Aporte econimia naranja al PIB (%)",
+       Title="Penetracion de internet en la poblacion y aporte de la economia naranja al PIB")
+p = ggplotly(my_graph)
+p
+```
+
+# Ajustando datos para mejorar visualizaciones eficientes
+```{r,echo=TRUE}
+df <- df %>% mutate(Crecimiento_GDP = ifelse(GDP.Growth.. >= 2.5, "2.5% ó más","Menos 2.5%"))
+
+df <- df %>% mutate(Anaranjados=ifelse(Creat.Ind...GDP >= 2.5, "Mas anaranjados", "Menos anaranjados"))
+```
+Para ver ranking, pedimos un orden en sentido descendente con arrange y desc 
+```{r,echo=TRUE}
+df %>% arrange(desc(Creat.Ind...GDP))
+```
+Buscando paises con nombres especificos
+```{r,echo=TRUE}
+library("dplyr")
+TopNaranjas <- df %>% filter(Country %in% c("Mexico", "Panama", "Argentina", "Colombia", "Brazil","Paraguay"))
+
+
+TopNaranjas %>% arrange(desc(Creat.Ind...GDP))
+
+
+```
+# Los paises Naranjas
+
+
+
+```{r,echo=TRUE}
+
+
+ggplot(TopNaranjas, aes(x=Internet.penetration...population, y=Services...GDP, size=GDP.PC))+ geom_point()+ facet_wrap(~Country)
+
+ggplot(TopNaranjas, aes(x=Education.invest...GDP, y=Creat.Ind...GDP, size=Unemployment))+ geom_point()+ facet_wrap(~Country)
+
+
+
+
+ggplot(TopNaranjas, aes(x=Internet.penetration...population, y=GDP.PC,fill=Creat.Ind...GDP)) + geom_tile()+ facet_wrap(~Country)+scale_fill_gradient(colors(distinct = TRUE))
+
+```
+
+
+# Resultados
+
+En cuanto al análisis realizado para la economía naranja podemos ver las siguientes concusiones:
+Las variables con mayor correlación:
+-	En los países donde el aporte de los servicios es alto tienen un PIB per cápita mayor.
+-	En los países en la donde Inversión de educación el porcentaje mas alto de la población es de 25 a 54 años.
+Sin embargo, podemos tomar en cuenta que las variables que más interés podemos tener para realizar un emprendimiento la relación de las variables de Penetración de Internet y la inversión en educación, con el aporte de la economía naranja al PIB. Y según las últimas observaciones podemos concluir que los mejores países para emprender dentro de la economía naranja son:
+Panamá y México.
+
 

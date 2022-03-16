@@ -10,20 +10,20 @@ summary(df)
 
 #Que paises tienen GPP.PC PIB mayor o igual a 15.000 USD
 
-df[df$GDP.PC>=15000,]
+na.omit(df[df$GDP.PC>=15000,],select=c(Country,GDP.PC))
 
 #Queremos saber que a que países la economía naranja (industrias creativas) portea el 2% a su PIB ( Aporte a la econimia naranja del PIB)
 
-df[df$Creat.Ind...GDP<=2,]
+na.omit(df[df$Creat.Ind...GDP<=2,],select=c(Country,Creat.Ind...GDP))
 
 #solo la penetracion de internet en la poblacion sea mayor al 80% y que la inversion en educacion del PIB sean mayor o igual a 4.5
-new_Orange <- subset(df,df$Internet.penetration...population>80 & df$Education.invest...GDP>=4.5)
+na.omit(new_Orange <- subset(df,df$Internet.penetration...population>80 & df$Education.invest...GDP>=4.5))
 
 #Quiero verlo desde la varible de la econoima naranja
 #solo la penetracion de internet en la poblacion sea mayor al 80% y que la inversion en educacion del PIB sean mayor o igual a 4.5
 
 
-(new_Orange <- subset(df,Internet.penetration...population>80 & Education.invest...GDP>=4.5,select=c(Country,Creat.Ind...GDP)))
+na.omit(new_Orange <- subset(df,Internet.penetration...population>80 & Education.invest...GDP>=4.5,select=c(Country,Creat.Ind...GDP)))
 
 #Ajustamos Los nombre de las columnas
 library(plyr)
@@ -36,7 +36,7 @@ glimpse(df)
 #EDA 
 #Scatter plot
 plot(df$Unemployment ~ df$Education.invest...GDP,
-     xlab="Inversion edución (%PIB)",
+     xlab="Inversion educación (%PIB)",
      ylab ="Desempleo",
      main= "Relación inversion en Educación y desempleo")
 
@@ -88,7 +88,8 @@ ggplot()+geom_histogram(data=df,
 #Hacemos una clasificacion de los paises segun su PIB per capitá
 
 (mediaPIB<-mean(df$GDP.PC))
-
+library("dplyr")
+library("ggplot2")
 df <-df %>%
   mutate(Strong_economy = ifelse(GDP.PC < mediaPIB,
                                  "Por debajo promedio pib per capita",
@@ -142,7 +143,7 @@ my_graph<-ggplot(df, aes(Internet.penetration...population,Creat.Ind...GDP,label
        Title="Penetracion de internet en la poblacion y aporte de la economia naranja al PIB")
 my_graph
 install.packages("plotly")
-
+library("plotly")
 p = ggplotly(my_graph)
 p
 
@@ -153,6 +154,7 @@ p
 
 View(df)
 pairs(df[,2:6])
+newdata<-Subset(df,select(5,6,10,11,12,1))
 
 pairs(df[,5:10])
 #Compotamientos interensante
@@ -168,3 +170,20 @@ cor(df[,2:13])
 
 #Como tenemos NA corregimos
 cor(df[,5:10],use = "complete.obs")
+
+
+# Ajustando datos para mejorar visualizaciones eficientes
+
+df <- df %>% mutate(Crecimiento_GDP = ifelse(GDP.Growth.. >= 2.5, "2.5% ó más","Menos 2.5%"))
+
+df <- df %>% mutate(Anaranjados=ifelse(Creat.Ind...GDP >= 2.5, "Mas anaranjados", "Menos anaranjados"))
+#Para ver ranking, pedimos un orden en sentido descendente con arrange y desc 
+df %>% arrange(desc(Creat.Ind...GDP))
+
+#Buscando paises con nombres especificos con %in% 
+library("dplyr")
+TopNaranjas <- df %>% filter(Country %in% c("Mexico", "Panama", "Argentina", "Colombia", "Brazil","Paraguay"))
+
+TopNaranjas
+
+TopNaranjas %>% arrange(desc(Creat.Ind...GDP))
